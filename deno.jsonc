@@ -11,6 +11,12 @@
   "test": {
     "exclude": ["src/**/*.test.ts"]
   },
+  // deno fmt's HTML/XML formatter reindents .github/assets/logo.svg and inserts
+  // whitespace text nodes between the <tspan>s, which SVG renders as a visible
+  // space between the "f" and "p" glyphs.
+  "fmt": {
+    "exclude": [".github/assets/logo.svg"]
+  },
   "imports": {
     "vitest": "npm:vitest@^4.1.10",
     "mod": "./mod.ts",
