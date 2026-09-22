@@ -38,10 +38,10 @@ project_name: "fp"
 # The first language server is the default language and the respective language server will be used as a fallback.
 # Note that when using the JetBrains backend, language servers are not used and this list is correspondingly ignored.
 language_servers:
-- typescript
+  - typescript
 
-# the encoding used by text files in the project
-# For a list of possible encodings, see https://docs.python.org/3.11/library/codecs.html#standard-encodings
+  # the encoding used by text files in the project
+  # For a list of possible encodings, see https://docs.python.org/3.11/library/codecs.html#standard-encodings
 encoding: "utf-8"
 
 # optional shell command to run before the language backend (LSP or JetBrains) is initialised.
@@ -93,17 +93,17 @@ ls_specific_settings: {}
 #     - "./subproject1"
 #     - "./subproject2"
 ls_workspace_folders:
-- "."
+  - "."
 
-# list of additional workspace folder paths for cross-package reference support.
-# Paths can be absolute or relative to the project root.
-# Each folder is registered as an LSP workspace folder, enabling language servers to discover
-# symbols and references across package boundaries, but these folders are not indexed by Serena,
-# i.e. the respective symbols will not be found using Serena's symbol search tools.
-# Example:
-#   additional_workspace_folders:
-#     - ../sibling-package
-#     - ../shared-lib
+  # list of additional workspace folder paths for cross-package reference support.
+  # Paths can be absolute or relative to the project root.
+  # Each folder is registered as an LSP workspace folder, enabling language servers to discover
+  # symbols and references across package boundaries, but these folders are not indexed by Serena,
+  # i.e. the respective symbols will not be found using Serena's symbol search tools.
+  # Example:
+  #   additional_workspace_folders:
+  #     - ../sibling-package
+  #     - ../shared-lib
 ls_additional_workspace_folders: []
 
 # list of additional paths to ignore in this project.

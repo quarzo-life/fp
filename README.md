@@ -1,9 +1,5 @@
 <p align="center">
-  <img src=".github/assets/logo.svg" alt="fp logo" width="96" height="96">
-</p>
-
-<p align="center">
-  <h1>fp</h1>
+<img src=".github/assets/logo.svg" alt="fp logo" width="96" height="96">
 </p>
 
 <p align="center">
@@ -37,8 +33,7 @@ bunx jsr add @quarzo-life/fp
 
 ## ⚡️ Quick start
 
-Every function is pure and side-effect free, allowing you to bundle exactly what
-you use.
+Every function is pure and side-effect free, allowing you to bundle exactly what you use.
 
 ```ts
 import { error, pipe, type Result, success } from "jsr:@quarzo-life/fp";
@@ -101,6 +96,19 @@ with `isFailureKind`.
 
 `Either<U>` is an optional value: `some(value)` or `none()`. Same fluent API
 (`.bind()`, `.bindNone()`, `.fold()`).
+
+## Examples
+
+- [`examples/basic.ts`](examples/basic.ts) - `Result` and `Either` chaining
+  with `pipe`.
+- [`examples/advanced.ts`](examples/advanced.ts) - a context-aware async
+  chain (`nextAsyncResult`) where a step enriches the context for later
+  ones, and a classified `DomainFailure` tells the caller not to retry.
+
+```sh
+deno run examples/basic.ts
+deno run examples/advanced.ts
+```
 
 ## License
 

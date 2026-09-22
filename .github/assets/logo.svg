@@ -1,6 +1,10 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 512 512" role="img" aria-label="fp logo">
-  <rect width="512" height="512" rx="96" fill="#12141A"/>
-  <text x="256" y="345" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-weight="700" font-size="260" letter-spacing="-16">
-    <tspan fill="#F5F3EE">f</tspan><tspan fill="#8B5CF6">p</tspan>
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128"
+  viewBox="0 0 512 512" role="img" aria-label="fp logo">
+  <rect width="512" height="512" rx="96" fill="#12141A" />
+  <text x="256" y="345" text-anchor="middle"
+    font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace"
+    font-weight="700" font-size="260" letter-spacing="-16">
+    <tspan fill="#F5F3EE">f</tspan>
+    <tspan fill="#8B5CF6">p</tspan>
   </text>
 </svg>

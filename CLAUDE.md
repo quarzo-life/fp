@@ -5,7 +5,7 @@ code in this repository.
 
 ## Project
 
-`@quarzo-life/fp` — a Deno/JSR library of functional programming helpers: pure,
+`@quarzo-life/fp` - a Deno/JSR library of functional programming helpers: pure,
 side-effect free functions with no runtime dependencies. Sibling project to
 [`@quarzo-life/moneta`](https://github.com/quarzo-life/moneta) and
 [`@quarzo-life/portio`](https://github.com/quarzo-life/portio), and follows the
@@ -24,17 +24,17 @@ value), and helper types that were private are now exported (required by
 The runtime is Deno, but **tests run under vitest**, not Deno's native runner
 (`deno.jsonc` excludes `src/**/*.test.ts` from `deno test` discovery):
 
-- `deno task test` — run the vitest suite once.
-- `deno task test:watch` — vitest in watch mode.
-- `deno task test src/api/functions/__tests__/pipe.test.ts` — a single file.
-- `deno lint` / `deno fmt` — lint and format (lint uses the `recommended`
+- `deno task test` - run the vitest suite once.
+- `deno task test:watch` - vitest in watch mode.
+- `deno task test src/api/functions/__tests__/pipe.test.ts` - a single file.
+- `deno lint` / `deno fmt` - lint and format (lint uses the `recommended`
   ruleset).
-- `deno check mod.ts 'src/**/*.ts'` — type-check the entrypoint _and_ the tests
+- `deno check mod.ts 'src/**/*.ts'` - type-check the entrypoint _and_ the tests
   (vitest does not type-check).
-- `deno doc --lint mod.ts` — must stay clean: every exported symbol (including
+- `deno doc --lint mod.ts` - must stay clean: every exported symbol (including
   class members and each function overload) needs JSDoc, explicit return types,
   and no references to private types.
-- `deno publish --dry-run --allow-dirty` — verify the package is JSR-publishable
+- `deno publish --dry-run --allow-dirty` - verify the package is JSR-publishable
   (runs the slow-types check).
 
 Publishing to JSR happens automatically via `.github/workflows/publish.yml` on
@@ -62,24 +62,24 @@ Functions are pure, **one file per exported function or class**, named in
 kebab-case after the symbol (`is-defined.ts` → `isDefined`). Shared types of a
 group live in that group's `types.ts`. Groups:
 
-- `functions/` — `compose`, `composeAsync`, `pipe`, `curry`; `types.ts` holds
+- `functions/` - `compose`, `composeAsync`, `pipe`, `curry`; `types.ts` holds
   the `AnyFunction`/`AnyAsyncFunction` escape hatches (the only `any` in the
   codebase, file-level lint-ignored).
-- `arrays/` — `head`, `last`, `map`, `filter`.
-- `objects/` — `prop`, `omit`.
-- `guards/` — `isDefined`.
-- `identity-functor/` — `identityFunctor`.
-- `immutability/` — `freeze` (shallow; blocks `Map`/`Set` mutators).
-- `either/` — `Either` = `Some | None`, constructors `some`/`none`, guards,
+- `arrays/` - `head`, `last`, `map`, `filter`.
+- `objects/` - `prop`, `omit`.
+- `guards/` - `isDefined`.
+- `identity-functor/` - `identityFunctor`.
+- `immutability/` - `freeze` (shallow; blocks `Map`/`Set` mutators).
+- `either/` - `Either` = `Some | None`, constructors `some`/`none`, guards,
   `getTestSome`.
-- `result/` — `Result` = `Success | Error`, constructors `success`,
+- `result/` - `Result` = `Success | Error`, constructors `success`,
   `successVoid`, `error`, guards, `getTestResult`/`getTestError`, `asyncResult`
   (fluent chain over `Promise<Result>`).
-  - `result/errors/` — `ResultError` base class (does **not** extend the global
+  - `result/errors/` - `ResultError` base class (does **not** extend the global
     `Error`) and the `FailureKind`-classified subclasses `DomainFailure`,
     `TransientTechnicalFailure`, `PermanentTechnicalFailure`, plus
     `isFailureKind`.
-  - `result/with-context/` — `WithContext` value/context pairs travelling
+  - `result/with-context/` - `WithContext` value/context pairs travelling
     through an async chain: `wrap`, `promiseWrap`, `promiseResultWrap`,
     `unwrap`, `withContext`, `withContextAsyncResult`, and `nextAsyncResult`
     (the context-aware counterpart of `asyncResult`).
