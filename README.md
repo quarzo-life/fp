@@ -3,13 +3,11 @@
 </p>
 
 <p align="center">
-  <strong>Functional programming helpers for JavaScript and TypeScript.</strong>
+  <strong>Functional programming helpers for TypeScript.</strong>
 </p>
 
 <p align="center">
-  A lightweight, dependency-free collection of pure functions. Sibling project
-  to <a href="https://github.com/quarzo-life/moneta">Moneta</a> and
-  <a href="https://github.com/quarzo-life/portio">Portio</a>.
+  A lightweight, dependency-free collection of pure functions.
 </p>
 
 ---
@@ -39,22 +37,66 @@ Every function is pure and side-effect free, allowing you to bundle exactly what
 you use.
 
 ```ts
-import { identity } from "jsr:@quarzo-life/fp";
+import { error, pipe, type Result, success } from "jsr:@quarzo-life/fp";
 
-identity(42); // 42
-[1, 2, 3].map(identity); // [1, 2, 3]
+const parse = (raw: string): Result<number, "NOT_A_NUMBER"> => {
+  const n = Number(raw);
+  return Number.isNaN(n) ? error("NOT_A_NUMBER") : success(n);
+};
+
+const double = (n: number) => n * 2;
+const asString = (n: number) => `${n}`;
+
+parse("21")
+  .bind(pipe(double, asString, success))
+  .fold(
+    (s) => s,
+    (e) => e,
+  ); // "42"
 ```
 
-## Scope
+## What's inside
 
-This is the initial scaffold of the library. It currently exposes `identity`;
-composition helpers (`pipe`, `compose`, `curry`), data accessors and
-`Result`/`Either` types will follow.
+| Group          | Exports                                                                                                                             |
+| -------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
+| Functions      | `identity`, `compose`, `composeAsync`, `pipe`, `curry`                                                                              |
+| Arrays         | `head`, `last`, `map`, `filter` (data-last, curried)                                                                                |
+| Objects        | `prop`, `omit`                                                                                                                      |
+| Guards         | `isDefined`                                                                                                                         |
+| Immutability   | `freeze`, `Immutable`, `ImmutableArray`, `ImmutableRecord`                                                                          |
+| Either         | `some`, `none`, `cautiouslyUseIsSome`, `cautiouslyUseIsNone`, `getTestSome`                                                         |
+| Result         | `success`, `successVoid`, `error`, `cautiouslyUseIsSuccess`, `cautiouslyUseIsError`, `getTestResult`, `getTestError`, `asyncResult` |
+| Result errors  | `ResultError`, `DomainFailure`, `TransientTechnicalFailure`, `PermanentTechnicalFailure`, `isFailureKind`                           |
+| Result context | `nextAsyncResult`, `withContext`, `wrap`, `unwrap`, `promiseWrap`, `promiseResultWrap`, `withContextAsyncResult`                    |
 
-## Links
+### Result
 
-- [Moneta](https://github.com/quarzo-life/moneta)
-- [Portio](https://github.com/quarzo-life/portio)
+`Result<U, E>` is either a `Success<U>` or an `Error<E>`. Chain with `.bind()`
+(runs on success, forwards errors), recover with `.bindError()`, and collapse
+with `.fold()`. `asyncResult` gives the same fluent API over a
+`Promise<Result>`:
+
+```ts
+import { asyncResult, success } from "jsr:@quarzo-life/fp";
+
+const increment = (n: number) => Promise.resolve(success(n + 1));
+const square = (n: number) => Promise.resolve(success(n ** 2));
+
+await asyncResult(Promise.resolve(success(1)))
+  .bind(increment)
+  .bind(square)
+  .get(); // Success<number> with value 4
+```
+
+Errors returned in a `Result` can extend `ResultError`, or one of its classified
+flavours (`DomainFailure`, `TransientTechnicalFailure`,
+`PermanentTechnicalFailure`) so callers can decide whether a retry makes sense
+with `isFailureKind`.
+
+### Either
+
+`Either<U>` is an optional value: `some(value)` or `none()`. Same fluent API
+(`.bind()`, `.bindNone()`, `.fold()`).
 
 ## License
 
