@@ -10,6 +10,13 @@
   A lightweight, dependency-free collection of pure functions.
 </p>
 
+<p align="center">
+  <a href="https://jsr.io/@quarzo-life/fp"><img src="https://jsr.io/badges/@quarzo-life/fp" alt="JSR version"></a>
+  <a href="https://jsr.io/@quarzo-life/fp"><img src="https://jsr.io/badges/@quarzo-life/fp/score" alt="JSR score"></a>
+  <a href="https://github.com/quarzo-life/fp/actions/workflows/publish.yml"><img src="https://github.com/quarzo-life/fp/actions/workflows/publish.yml/badge.svg" alt="CI"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="License: MIT"></a>
+</p>
+
 ---
 
 ## 📦 Install
@@ -33,7 +40,8 @@ bunx jsr add @quarzo-life/fp
 
 ## ⚡️ Quick start
 
-Every function is pure and side-effect free, allowing you to bundle exactly what you use.
+Every function is pure and side-effect free, allowing you to bundle exactly what
+you use.
 
 ```ts
 import { error, pipe, type Result, success } from "jsr:@quarzo-life/fp";
@@ -99,11 +107,11 @@ with `isFailureKind`.
 
 ## Examples
 
-- [`examples/basic.ts`](examples/basic.ts) - `Result` and `Either` chaining
-  with `pipe`.
-- [`examples/advanced.ts`](examples/advanced.ts) - a context-aware async
-  chain (`nextAsyncResult`) where a step enriches the context for later
-  ones, and a classified `DomainFailure` tells the caller not to retry.
+- [`examples/basic.ts`](examples/basic.ts) - `Result` and `Either` chaining with
+  `pipe`.
+- [`examples/advanced.ts`](examples/advanced.ts) - a context-aware async chain
+  (`nextAsyncResult`) where a step enriches the context for later ones, and a
+  classified `DomainFailure` tells the caller not to retry.
 
 ```sh
 deno run examples/basic.ts

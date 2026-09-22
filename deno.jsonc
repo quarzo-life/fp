@@ -9,20 +9,20 @@
   // Tests run under vitest (`deno task test`), not Deno's native runner.
   // Keep `deno test` from auto-discovering these vitest files.
   "test": {
-    "exclude": ["src/**/*.test.ts"],
+    "exclude": ["src/**/*.test.ts"]
   },
   "imports": {
     "vitest": "npm:vitest@^4.1.10",
     "mod": "./mod.ts",
-    "api/": "./src/api/",
+    "api/": "./src/api/"
   },
   "tasks": {
     "test": "deno run -A npm:vitest run",
-    "test:watch": "deno run -A npm:vitest",
+    "test:watch": "deno run -A npm:vitest"
   },
   "lint": {
     "rules": {
-      "tags": ["recommended"],
-    },
-  },
+      "tags": ["recommended"]
+    }
+  }
 }
