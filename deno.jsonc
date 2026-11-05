@@ -1,7 +1,7 @@
 {
   "name": "@quarzo-life/fp",
-  "version": "0.1.1",
-  "description": "Pure, dependency-free functional programming helpers for TypeScript - pipe/compose, Result, Either, immutability.",
+  "version": "0.2.0",
+  "description": "Pure, dependency-free functional programming helpers for TypeScript - pipe/compose, Result, Option, immutability.",
   "license": "MIT",
   "exports": "./mod.ts",
   "lock": true,

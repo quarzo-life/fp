@@ -1,14 +1,14 @@
-import type { Either, Some } from "./types.ts";
+import type { Option, Some } from "./types.ts";
 
 /**
- * Type guard checking whether an {@linkcode Either} is a {@linkcode Some}.
+ * Type guard checking whether an {@linkcode Option} is a {@linkcode Some}.
  *
  * Use cautiously: most of the time `.bind()` or `.fold()` express the
  * intent better than branching on the discriminant.
  *
  * @typeParam U - The type of the value when present.
- * @param either - The `Either` to inspect.
- * @returns `true` when `either` holds a value.
+ * @param option - The `Option` to inspect.
+ * @returns `true` when `option` holds a value.
  *
  * @example
  * ```ts
@@ -19,5 +19,5 @@ import type { Either, Some } from "./types.ts";
  * ```
  */
 export const cautiouslyUseIsSome = <U>(
-  either: Either<U>,
-): either is Some<U> => either.type === "SOME";
+  option: Option<U>,
+): option is Some<U> => option.type === "SOME";

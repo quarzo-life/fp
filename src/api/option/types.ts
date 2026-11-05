@@ -1,7 +1,7 @@
 /**
- * A function mapping a present value to a new {@linkcode Either}.
+ * A function mapping a present value to a new {@linkcode Option}.
  *
- * Argument type of `Either.bind`.
+ * Argument type of `Option.bind`.
  *
  * @example
  * ```ts
@@ -10,12 +10,12 @@
  * const increment: SomeMappingFunction<number, number> = (n) => some(n + 1);
  * ```
  */
-export type SomeMappingFunction<U, V> = (u: U) => Either<V>;
+export type SomeMappingFunction<U, V> = (u: U) => Option<V>;
 
 /**
- * A function producing a fallback {@linkcode Either} from an absent value.
+ * A function producing a fallback {@linkcode Option} from an absent value.
  *
- * Argument type of `Either.bindNone`.
+ * Argument type of `Option.bindNone`.
  *
  * @example
  * ```ts
@@ -24,7 +24,7 @@ export type SomeMappingFunction<U, V> = (u: U) => Either<V>;
  * const fallback: NoneMappingFunction<number> = () => some(0);
  * ```
  */
-export type NoneMappingFunction<V> = () => Either<V>;
+export type NoneMappingFunction<V> = () => Option<V>;
 
 /**
  * The operations shared by {@linkcode Some} and {@linkcode None}.
@@ -34,25 +34,25 @@ export type NoneMappingFunction<V> = () => Either<V>;
  *
  * @example
  * ```ts
- * import { type AbstractEither } from "@quarzo-life/fp";
+ * import { type AbstractOption } from "@quarzo-life/fp";
  *
- * type Present = AbstractEither<"SOME", number>;
+ * type Present = AbstractOption<"SOME", number>;
  * ```
  */
-export type AbstractEither<Type, U> = {
+export type AbstractOption<Type, U> = {
   /** Discriminant, `"SOME"` or `"NONE"`. */
   readonly type: Type;
   /** Chains a computation on the value when present; no-op on `None`. */
-  readonly bind: <V>(fn: SomeMappingFunction<U, V>) => Either<V>;
+  readonly bind: <V>(fn: SomeMappingFunction<U, V>) => Option<V>;
   /**
    * Provides a fallback when the value is absent; no-op on `Some`.
    *
-   * The result is typed `Either<U | V>` rather than `Either<U>` so that
-   * `Either` stays covariant in `U` (an `Either<Sub>` remains assignable to
-   * an `Either<Super>`).
+   * The result is typed `Option<U | V>` rather than `Option<U>` so that
+   * `Option` stays covariant in `U` (an `Option<Sub>` remains assignable to
+   * an `Option<Super>`).
    */
-  readonly bindNone: <V>(fn: NoneMappingFunction<V>) => Either<U | V>;
-  /** Collapses the `Either` by handling both cases. */
+  readonly bindNone: <V>(fn: NoneMappingFunction<V>) => Option<U | V>;
+  /** Collapses the `Option` by handling both cases. */
   readonly fold: <R>(
     onSome: (u: U) => R,
     onNone: () => R,
@@ -60,7 +60,7 @@ export type AbstractEither<Type, U> = {
 };
 
 /**
- * An {@linkcode Either} holding a value.
+ * An {@linkcode Option} holding a value.
  *
  * @typeParam U - The type of the value.
  *
@@ -72,10 +72,10 @@ export type AbstractEither<Type, U> = {
  * present.value; // 1
  * ```
  */
-export type Some<U> = AbstractEither<"SOME", U> & { readonly value: U };
+export type Some<U> = AbstractOption<"SOME", U> & { readonly value: U };
 
 /**
- * An {@linkcode Either} holding no value.
+ * An {@linkcode Option} holding no value.
  *
  * @typeParam U - The type the value would have had.
  *
@@ -86,7 +86,7 @@ export type Some<U> = AbstractEither<"SOME", U> & { readonly value: U };
  * const absent: None<number> = none();
  * ```
  */
-export type None<U> = AbstractEither<"NONE", U>;
+export type None<U> = AbstractOption<"NONE", U>;
 
 /**
  * An optional value: either {@linkcode Some} or {@linkcode None}.
@@ -98,13 +98,13 @@ export type None<U> = AbstractEither<"NONE", U>;
  *
  * @example
  * ```ts
- * import { type Either, none, some } from "@quarzo-life/fp";
+ * import { type Option, none, some } from "@quarzo-life/fp";
  *
- * const find = (id: string): Either<string> =>
+ * const find = (id: string): Option<string> =>
  *   id === "1" ? some("Case") : none();
  *
  * find("1").fold((name) => `Hello ${name}`, () => "Unknown"); // "Hello Case"
  * find("2").fold((name) => `Hello ${name}`, () => "Unknown"); // "Unknown"
  * ```
  */
-export type Either<U> = Some<U> | None<U>;
+export type Option<U> = Some<U> | None<U>;

@@ -1,7 +1,7 @@
 import type { None, NoneMappingFunction } from "./types.ts";
 
 /**
- * Builds a {@linkcode None}: an {@linkcode Either} holding no value.
+ * Builds a {@linkcode None}: an {@linkcode Option} holding no value.
  *
  * `bind` is a no-op returning `None`; `bindNone` applies its function;
  * `fold` calls `onNone`.
@@ -13,8 +13,8 @@ import type { None, NoneMappingFunction } from "./types.ts";
  * ```ts
  * import { getTestSome, none, some } from "@quarzo-life/fp";
  *
- * const either = none<number>().bindNone(() => some(1));
- * getTestSome(either); // 1
+ * const option = none<number>().bindNone(() => some(1));
+ * getTestSome(option); // 1
  * ```
  */
 export const none = <U>(): None<U> => ({

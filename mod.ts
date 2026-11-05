@@ -9,7 +9,7 @@
  * - **Objects**: `prop`, `omit`.
  * - **Guards**: `isDefined`.
  * - **Immutability**: `freeze` and the `Immutable*` types.
- * - **Either**: an optional value (`some` / `none`).
+ * - **Option**: an optional value (`some` / `none`).
  * - **Result**: a fallible outcome (`success` / `error`), its asynchronous
  *   chain (`asyncResult`), classified failures (`DomainFailure`, …) and a
  *   context-carrying variant (`nextAsyncResult`, `withContext`).

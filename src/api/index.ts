@@ -1,5 +1,5 @@
 export * from "./arrays/index.ts";
-export * from "./either/index.ts";
+export * from "./option/index.ts";
 export * from "./functions/index.ts";
 export * from "./guards/index.ts";
 export { identity } from "./identity.ts";

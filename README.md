@@ -71,7 +71,7 @@ parse("21")
 | Objects        | `prop`, `omit`                                                                                                                      |
 | Guards         | `isDefined`                                                                                                                         |
 | Immutability   | `freeze`, `Immutable`, `ImmutableArray`, `ImmutableRecord`                                                                          |
-| Either         | `some`, `none`, `cautiouslyUseIsSome`, `cautiouslyUseIsNone`, `getTestSome`                                                         |
+| Option         | `some`, `none`, `cautiouslyUseIsSome`, `cautiouslyUseIsNone`, `getTestSome`                                                         |
 | Result         | `success`, `successVoid`, `error`, `cautiouslyUseIsSuccess`, `cautiouslyUseIsError`, `getTestResult`, `getTestError`, `asyncResult` |
 | Result errors  | `ResultError`, `DomainFailure`, `TransientTechnicalFailure`, `PermanentTechnicalFailure`, `isFailureKind`                           |
 | Result context | `nextAsyncResult`, `withContext`, `wrap`, `unwrap`, `promiseWrap`, `promiseResultWrap`, `withContextAsyncResult`                    |
@@ -100,14 +100,14 @@ flavours (`DomainFailure`, `TransientTechnicalFailure`,
 `PermanentTechnicalFailure`) so callers can decide whether a retry makes sense
 with `isFailureKind`.
 
-### Either
+### Option
 
-`Either<U>` is an optional value: `some(value)` or `none()`. Same fluent API
+`Option<U>` is an optional value: `some(value)` or `none()`. Same fluent API
 (`.bind()`, `.bindNone()`, `.fold()`).
 
 ## Examples
 
-- [`examples/basic.ts`](examples/basic.ts) - `Result` and `Either` chaining with
+- [`examples/basic.ts`](examples/basic.ts) - `Result` and `Option` chaining with
   `pipe`.
 - [`examples/advanced.ts`](examples/advanced.ts) - a context-aware async chain
   (`nextAsyncResult`) where a step enriches the context for later ones, and a

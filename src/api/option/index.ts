@@ -4,10 +4,10 @@ export { getTestSome } from "./get-test-some.ts";
 export { none } from "./none.ts";
 export { some } from "./some.ts";
 export type {
-  AbstractEither,
-  Either,
+  AbstractOption,
   None,
   NoneMappingFunction,
+  Option,
   Some,
   SomeMappingFunction,
 } from "./types.ts";

@@ -4,9 +4,9 @@ import { cautiouslyUseIsSome } from "../cautiously-use-is-some.ts";
 import { getTestSome } from "../get-test-some.ts";
 import { none } from "../none.ts";
 import { some } from "../some.ts";
-import type { Either } from "../types.ts";
+import type { Option } from "../types.ts";
 
-describe("Either", () => {
+describe("Option", () => {
   describe("bind", () => {
     test("applies the function when there is a value (Some)", () => {
       const actual = some(0).bind((n) => some(n + 1));
@@ -58,9 +58,9 @@ describe("Either", () => {
   });
 
   describe("variance", () => {
-    test("Either of a subtype is assignable to Either of a supertype", () => {
-      const narrow: Either<number> = some(1);
-      const wide: Either<number | string> = narrow; // must type-check
+    test("Option of a subtype is assignable to Option of a supertype", () => {
+      const narrow: Option<number> = some(1);
+      const wide: Option<number | string> = narrow; // must type-check
 
       expect(getTestSome(wide)).toBe(1);
     });
