@@ -49,6 +49,11 @@ export type AbstractResult<Type, U, E> = {
   readonly bind: <V, F = E>(
     fn: ResultMappingFunction<U, V, F>,
   ) => Result<V, E | F>;
+  /**
+   * Transforms the success value with a function that cannot fail; no-op on
+   * `Error`. Same as `.bind((u) => success(fn(u)))`.
+   */
+  readonly map: <V>(fn: (u: U) => V) => Result<V, E>;
   /** Chains a computation on the error; no-op on `Success`. */
   readonly bindError: <F = E>(
     fn: ResultErrorMappingFunction<U, E, F>,

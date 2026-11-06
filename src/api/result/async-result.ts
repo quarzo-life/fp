@@ -58,6 +58,11 @@ export type AsyncResult<U, E> = {
   readonly bind: <V, F = E>(
     fn: MappingFunction<U, V, F>,
   ) => AsyncResult<V, E | F>;
+  /**
+   * Transforms the success value with a synchronous function that cannot
+   * fail; no-op on `Error`. Same as `.bind((u) => success(fn(u)))`.
+   */
+  readonly map: <V>(fn: (u: U) => V) => AsyncResult<V, E>;
   /** Chains a (possibly async) computation on the error. */
   readonly bindError: <F = E>(
     fn: AsyncErrorMappingFunction<U, E, F>,
@@ -68,11 +73,11 @@ export type AsyncResult<U, E> = {
 
 /**
  * Wraps a `Promise<Result>` so asynchronous steps can be chained with
- * `.bind()` / `.bindError()` without manual `await`s, then resolved with
- * `.get()`.
+ * `.bind()` / `.map()` / `.bindError()` without manual `await`s, then resolved
+ * with `.get()`.
  *
- * Errors short-circuit: once a step yields an `Error`, later `bind`s are
- * skipped and the error is forwarded.
+ * Errors short-circuit: once a step yields an `Error`, later `bind`s and
+ * `map`s are skipped and the error is forwarded.
  *
  * @typeParam U - The type of the success value.
  * @typeParam E - The type of the error.
@@ -92,6 +97,16 @@ export type AsyncResult<U, E> = {
  *   .get();
  * getTestResult(result); // 4
  * ```
+ *
+ * @example
+ * ```ts
+ * import { asyncResult, getTestResult, success } from "@quarzo-life/fp";
+ *
+ * const result = await asyncResult(Promise.resolve(success(1)))
+ *   .map((n) => n + 1)
+ *   .get();
+ * getTestResult(result); // 2
+ * ```
  */
 export const asyncResult = <U, E = string>(
   promise: Promise<Result<U, E>>,
@@ -107,6 +122,8 @@ export const asyncResult = <U, E = string>(
     );
     return asyncResult<V, E | F>(next as Promise<Result<V, E | F>>);
   },
+  map: <V>(fn: (u: U) => V) =>
+    asyncResult<V, E>(promise.then((result) => result.map(fn))),
   bindError: (fn) => {
     const next = promise.then((result) => {
       if (cautiouslyUseIsError(result)) {

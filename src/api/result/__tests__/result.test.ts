@@ -29,6 +29,30 @@ describe("Result", () => {
     });
   });
 
+  describe("map", () => {
+    test("applies the function on a Success", () => {
+      const actual = success(1).map((n) => n + 1);
+
+      expect(getTestResult(actual)).toBe(2);
+    });
+
+    test("propagates the error on an Error", () => {
+      const failed: Result<number, string> = error("KO");
+      const fn: (n: number) => number = vi.fn();
+
+      const actual = failed.map(fn);
+
+      expect(getTestError(actual)).toBe("KO");
+      expect(fn).not.toHaveBeenCalled();
+    });
+
+    test("keeps a returned Result as the success value", () => {
+      const actual = success(1).map((n) => success(n + 1));
+
+      expect(getTestResult(getTestResult(actual))).toBe(2);
+    });
+  });
+
   describe("bindError", () => {
     test("is a no-op on a Success", () => {
       const actual = success(1).bindError(() => success(0));
@@ -74,6 +98,12 @@ describe("Result", () => {
 
     test("binds without an argument", () => {
       const actual = successVoid().bind(() => success(1));
+
+      expect(getTestResult(actual)).toBe(1);
+    });
+
+    test("maps without an argument", () => {
+      const actual = successVoid().map(() => 1);
 
       expect(getTestResult(actual)).toBe(1);
     });

@@ -1,3 +1,4 @@
+import { success } from "./success.ts";
 import type { ResultMappingFunction, Success } from "./types.ts";
 
 /**
@@ -19,6 +20,7 @@ export const successVoid = (): Success<void> => ({
   type: "SUCCESS",
   value: undefined,
   bind: <V, E>(fn: ResultMappingFunction<void, V, E>) => fn(),
+  map: <V>(fn: () => V) => success(fn()),
   bindError: () => successVoid(),
   fold: <R>(onSuccess: () => R) => onSuccess(),
 });

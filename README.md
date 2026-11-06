@@ -55,7 +55,7 @@ const double = (n: number) => n * 2;
 const asString = (n: number) => `${n}`;
 
 parse("21")
-  .bind(pipe(double, asString, success))
+  .map(pipe(double, asString))
   .fold(
     (s) => s,
     (e) => e,
@@ -79,8 +79,9 @@ parse("21")
 ### Result
 
 `Result<U, E>` is either a `Success<U>` or an `Error<E>`. Chain with `.bind()`
-(runs on success, forwards errors), recover with `.bindError()`, and collapse
-with `.fold()`. `asyncResult` gives the same fluent API over a
+(runs on success, forwards errors), transform the value with `.map()` (same as
+`.bind()`, for a step that cannot fail), recover with `.bindError()`, and
+collapse with `.fold()`. `asyncResult` gives the same fluent API over a
 `Promise<Result>`:
 
 ```ts
