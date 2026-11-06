@@ -27,7 +27,9 @@ describe("nextAsyncResult", () => {
   test("makes context management fully implicit", async () => {
     type Context = { step: number };
     const increment: ContextMappingFunction<number, number, never, Context> =
-      ([{ step }]) => (n) => Promise.resolve(success(n + step));
+      ([{ step }]) =>
+      (n) =>
+        Promise.resolve(success(n + step));
 
     const actual = await nextAsyncResult<number, never, Context>(
       Promise.resolve(success(1)),

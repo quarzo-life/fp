@@ -1,4 +1,4 @@
-// deno-lint-ignore-file ban-types
+/* oxlint-disable typescript/ban-types */
 import { identity } from "../identity.ts";
 import type { AnyFunction } from "./types.ts";
 

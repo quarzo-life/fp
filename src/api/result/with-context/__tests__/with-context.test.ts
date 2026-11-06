@@ -26,7 +26,9 @@ describe("withContext", () => {
     type Context = { step: number };
     const context: Context = { step: 2 };
     const increment: ContextMappingFunction<number, number, never, Context> =
-      ([{ step }]) => (n) => Promise.resolve(success(n + step));
+      ([{ step }]) =>
+      (n) =>
+        Promise.resolve(success(n + step));
 
     const actual = await asyncResult(wrap(context)(1))
       .bind(withContext(increment))
@@ -40,7 +42,9 @@ describe("withContext", () => {
     type Context = { step: number };
     const context: Context = { step: 2 };
     const increment: ContextMappingFunction<number, number, never, Context> =
-      ([{ step }]) => (n) => Promise.resolve(success(n + step));
+      ([{ step }]) =>
+      (n) =>
+        Promise.resolve(success(n + step));
 
     const actual = await asyncResult(promiseWrap(context)(Promise.resolve(1)))
       .bind(withContext(increment))
@@ -54,7 +58,9 @@ describe("withContext", () => {
     type Context = { step: number };
     const context: Context = { step: 2 };
     const increment: ContextMappingFunction<number, number, never, Context> =
-      ([{ step }]) => (n) => Promise.resolve(success(n + step));
+      ([{ step }]) =>
+      (n) =>
+        Promise.resolve(success(n + step));
 
     const actual = await asyncResult(Promise.resolve(success(1)))
       .bind(wrap(context))
@@ -69,7 +75,8 @@ describe("withContext", () => {
     type Context = { value: string };
     const context: Context = { value: "Hello World!" };
     const increment: ContextMappingFunction<number, number, never, Context> =
-      ([_, updateContext]) => (n) => {
+      ([_, updateContext]) =>
+      (n) => {
         updateContext({ value: "Hello Guys!" });
         return Promise.resolve(success(n + 1));
       };
@@ -92,10 +99,12 @@ describe("withContext", () => {
       never,
       FromContext,
       ToContext
-    > = ([context, updateContext]) => (n) => {
-      updateContext({ value: context.value.toString() });
-      return Promise.resolve(success(n + 1));
-    };
+    > =
+      ([context, updateContext]) =>
+      (n) => {
+        updateContext({ value: context.value.toString() });
+        return Promise.resolve(success(n + 1));
+      };
 
     const actual = await asyncResult(wrap(context)(0))
       .bind(withContext(increment))

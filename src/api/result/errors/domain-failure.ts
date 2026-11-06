@@ -18,8 +18,10 @@ import { FailureClassifiedError } from "./failure-classified-error.ts";
  * error(new InsufficientFunds()).error.failureKind; // "DOMAIN"
  * ```
  */
-export class DomainFailure<Code extends string>
-  extends FailureClassifiedError<Code, "DOMAIN"> {
+export class DomainFailure<Code extends string> extends FailureClassifiedError<
+  Code,
+  "DOMAIN"
+> {
   /** Always `"DOMAIN"`. */
-  readonly failureKind: "DOMAIN" = "DOMAIN";
+  readonly failureKind = "DOMAIN" as const;
 }

@@ -25,7 +25,8 @@ console.log(label); // "adult"
 
 const users = new Map([["ada", "Ada Lovelace"]]);
 
-const findUser = (id: string) => users.has(id) ? some(users.get(id)!) : none();
+const findUser = (id: string) =>
+  users.has(id) ? some(users.get(id)!) : none();
 
 const greeting = findUser("ada")
   .bind((name) => some(`Hello, ${name}!`))

@@ -53,10 +53,7 @@ export type AbstractOption<Type, U> = {
    */
   readonly bindNone: <V>(fn: NoneMappingFunction<V>) => Option<U | V>;
   /** Collapses the `Option` by handling both cases. */
-  readonly fold: <R>(
-    onSome: (u: U) => R,
-    onNone: () => R,
-  ) => R;
+  readonly fold: <R>(onSome: (u: U) => R, onNone: () => R) => R;
 };
 
 /**

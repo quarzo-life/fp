@@ -32,7 +32,10 @@ export class ResultError<Code extends string> {
    * @param message - A human-readable description.
    * @param code - A machine-readable code.
    */
-  constructor(public readonly message: string, public readonly code: Code) {
+  constructor(
+    public readonly message: string,
+    public readonly code: Code,
+  ) {
     this.name = new.target.name;
   }
 

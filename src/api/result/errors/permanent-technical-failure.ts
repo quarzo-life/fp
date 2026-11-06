@@ -19,8 +19,9 @@ import { FailureClassifiedError } from "./failure-classified-error.ts";
  * new MissingConfig("DB_URL").failureKind; // "PERMANENT_TECHNICAL"
  * ```
  */
-export class PermanentTechnicalFailure<Code extends string>
-  extends FailureClassifiedError<Code, "PERMANENT_TECHNICAL"> {
+export class PermanentTechnicalFailure<
+  Code extends string,
+> extends FailureClassifiedError<Code, "PERMANENT_TECHNICAL"> {
   /** Always `"PERMANENT_TECHNICAL"`. */
-  readonly failureKind: "PERMANENT_TECHNICAL" = "PERMANENT_TECHNICAL";
+  readonly failureKind = "PERMANENT_TECHNICAL" as const;
 }

@@ -42,17 +42,22 @@ import type {
  * getTestResult(result); // { value: 3, context: { step: 2 } }
  * ```
  */
-export const withContext = <U, V, E, FromContext, ToContext = FromContext>(
-  fn: ContextMappingFunction<U, V, E, FromContext, ToContext>,
-): MappingFunction<WithContext<U, FromContext>, WithContext<V, ToContext>, E> =>
-async ({ value, context }) => {
-  let nextContext: ToContext = context as unknown as ToContext;
+export const withContext =
+  <U, V, E, FromContext, ToContext = FromContext>(
+    fn: ContextMappingFunction<U, V, E, FromContext, ToContext>,
+  ): MappingFunction<
+    WithContext<U, FromContext>,
+    WithContext<V, ToContext>,
+    E
+  > =>
+  async ({ value, context }) => {
+    let nextContext: ToContext = context as unknown as ToContext;
 
-  const updateContext: UpdateContextFunction<ToContext> = (context) => {
-    nextContext = context;
+    const updateContext: UpdateContextFunction<ToContext> = (context) => {
+      nextContext = context;
+    };
+
+    return (await fn([context, updateContext])(value)).bind((v) =>
+      success<WithContext<V, ToContext>>({ value: v, context: nextContext }),
+    );
   };
-
-  return (await fn([context, updateContext])(value)).bind((v) =>
-    success<WithContext<V, ToContext>>({ value: v, context: nextContext })
-  );
-};

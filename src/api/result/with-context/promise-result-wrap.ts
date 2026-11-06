@@ -23,12 +23,15 @@ import type { WithContext } from "./types.ts";
  * getTestResult(result); // { value: 1, context: { step: 2 } }
  * ```
  */
-export const promiseResultWrap = <Context>(
-  context: Context,
-): <U, E>(
-  promise: Promise<Result<U, E>>,
-) => Promise<Result<WithContext<U, Context>, E>> =>
-<U, E>(
-  promise: Promise<Result<U, E>>,
-): Promise<Result<WithContext<U, Context>, E>> =>
-  promise.then((result) => result.bind((value) => success({ value, context })));
+export const promiseResultWrap =
+  <Context>(
+    context: Context,
+  ): (<U, E>(
+    promise: Promise<Result<U, E>>,
+  ) => Promise<Result<WithContext<U, Context>, E>>) =>
+  <U, E>(
+    promise: Promise<Result<U, E>>,
+  ): Promise<Result<WithContext<U, Context>, E>> =>
+    promise.then((result) =>
+      result.bind((value) => success({ value, context })),
+    );

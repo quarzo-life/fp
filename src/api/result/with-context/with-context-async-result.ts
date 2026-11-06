@@ -73,14 +73,10 @@ export const withContextAsyncResult = <U, E, FromContext>(
   bind: <V, F = E, ToContext = FromContext>(
     fn: ContextMappingFunction<U, V, F, FromContext, ToContext>,
   ) => {
-    const next = asyncResult(promise)
-      .bind(withContext(fn))
-      .get();
+    const next = asyncResult(promise).bind(withContext(fn)).get();
     return withContextAsyncResult(next);
   },
-  bindError: <F = E>(
-    fn: ErrorMappingFunction<E, F>,
-  ) => {
+  bindError: <F = E>(fn: ErrorMappingFunction<E, F>) => {
     const next = promise.then((r) => {
       if (cautiouslyUseIsError(r)) {
         return fn(r.error);
@@ -89,8 +85,5 @@ export const withContextAsyncResult = <U, E, FromContext>(
     });
     return withContextAsyncResult(next);
   },
-  get: () =>
-    asyncResult(promise)
-      .bind(unwrap)
-      .get(),
+  get: () => asyncResult(promise).bind(unwrap).get(),
 });

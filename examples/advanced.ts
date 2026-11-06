@@ -20,16 +20,16 @@ type Context = { readonly requestId: string; readonly startedAt?: number };
 const balances = new Map([["ada", 50]]);
 
 const withdraw = (accountId: string, amount: number) =>
-  nextAsyncResult(
-    Promise.resolve(success(amount)),
-    { requestId: crypto.randomUUID() } as Context,
-  )
+  nextAsyncResult(Promise.resolve(success(amount)), {
+    requestId: crypto.randomUUID(),
+  } as Context)
     .bind(
-      ([context, updateContext]: ContextParameters<Context>) => (n: number) => {
-        // Enrich the context for every step after this one.
-        updateContext({ ...context, startedAt: Date.now() });
-        return success(n);
-      },
+      ([context, updateContext]: ContextParameters<Context>) =>
+        (n: number) => {
+          // Enrich the context for every step after this one.
+          updateContext({ ...context, startedAt: Date.now() });
+          return success(n);
+        },
     )
     .bind(([{ requestId }]: ContextParameters<Context>) => (n: number) => {
       const balance = balances.get(accountId) ?? 0;

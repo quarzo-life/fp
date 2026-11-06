@@ -112,14 +112,12 @@ export const asyncResult = <U, E = string>(
   promise: Promise<Result<U, E>>,
 ): AsyncResult<U, E> => ({
   bind: <V, F = E>(fn: MappingFunction<U, V, F>) => {
-    const next = promise.then<Error<E> | Result<V, F>, never>(
-      (result) => {
-        if (cautiouslyUseIsSuccess(result)) {
-          return fn(result.value);
-        }
-        return Promise.resolve(result);
-      },
-    );
+    const next = promise.then<Error<E> | Result<V, F>, never>((result) => {
+      if (cautiouslyUseIsSuccess(result)) {
+        return fn(result.value);
+      }
+      return Promise.resolve(result);
+    });
     return asyncResult<V, E | F>(next as Promise<Result<V, E | F>>);
   },
   map: <V>(fn: (u: U) => V) =>

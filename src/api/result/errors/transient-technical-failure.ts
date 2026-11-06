@@ -19,8 +19,9 @@ import { FailureClassifiedError } from "./failure-classified-error.ts";
  * new Timeout().failureKind; // "TRANSIENT_TECHNICAL"
  * ```
  */
-export class TransientTechnicalFailure<Code extends string>
-  extends FailureClassifiedError<Code, "TRANSIENT_TECHNICAL"> {
+export class TransientTechnicalFailure<
+  Code extends string,
+> extends FailureClassifiedError<Code, "TRANSIENT_TECHNICAL"> {
   /** Always `"TRANSIENT_TECHNICAL"`. */
-  readonly failureKind: "TRANSIENT_TECHNICAL" = "TRANSIENT_TECHNICAL";
+  readonly failureKind = "TRANSIENT_TECHNICAL" as const;
 }

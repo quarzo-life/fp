@@ -5,8 +5,7 @@ describe("filter", () => {
   describe("uncurried", () => {
     test("filters an array", () => {
       expect(filter((x: number) => x % 2 === 0, [1, 2, 3, 4, 5])).toEqual([
-        2,
-        4,
+        2, 4,
       ]);
     });
   });

@@ -20,6 +20,6 @@ import type { WithContext } from "./types.ts";
  * getTestResult(result); // 1
  * ```
  */
-export const unwrap = <U, Context>(
-  { value }: WithContext<U, Context>,
-): Success<U> => success(value);
+export const unwrap = <U, Context>({
+  value,
+}: WithContext<U, Context>): Success<U> => success(value);

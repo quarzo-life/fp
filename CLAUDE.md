@@ -28,8 +28,13 @@ The runtime is Deno, but **tests run under vitest**, not Deno's native runner
 - `deno task test` — run the vitest suite once.
 - `deno task test:watch` — vitest in watch mode.
 - `deno task test src/api/functions/__tests__/pipe.test.ts` — a single file.
-- `deno lint` / `deno fmt` — lint and format (lint uses the `recommended`
-  ruleset).
+- `deno task lint` / `deno task format` (`deno task format:check` to check
+  without writing; the CI does not run it) — lint with oxlint and format with
+  oxfmt ([Oxc](https://oxc.rs)), as in the monorepo. `.oxlintrc.jsonc` holds the
+  rules of the `recommended` ruleset of `deno lint`; `.oxfmtrc.jsonc` the format
+  (80 columns). Do not use `deno lint` or `deno fmt`: their output differs from
+  oxfmt. Disable a rule with an `oxlint-disable` comment, not
+  `deno-lint-ignore`.
 - `deno check mod.ts 'src/**/*.ts'` — type-check the entrypoint _and_ the tests
   (vitest does not type-check).
 - `deno doc --lint mod.ts` — must stay clean: every exported symbol (including
@@ -39,8 +44,8 @@ The runtime is Deno, but **tests run under vitest**, not Deno's native runner
   (runs the slow-types check).
 
 Publishing to JSR happens automatically via `.github/workflows/publish.yml` on
-push to `main`: a `test` job runs fmt/lint/check/doc-lint/vitest and a publish
-dry run, and the `publish` job (`npx jsr publish`) only runs if it passes. Bump
+push to `main`: a `test` job runs lint/check/doc-lint/vitest and a publish dry
+run, and the `publish` job (`npx jsr publish`) only runs if it passes. Bump
 `version` in `deno.jsonc` before merging a release. The workflow only triggers
 on `main`, so run the same commands locally before pushing a branch.
 

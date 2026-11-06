@@ -1,0 +1,20 @@
+{
+  "$schema": "https://raw.githubusercontent.com/oxc-project/oxc/refs/tags/oxfmt_v0.75.0/npm/oxfmt/configuration_schema.json",
+  // Same format as the Quarzo Life monorepo (.oxfmtrc.jsonc): 80 columns,
+  // 2 spaces, double quotes, semicolons and trailing commas.
+  "printWidth": 80,
+  "tabWidth": 2,
+  "useTabs": false,
+  "semi": true,
+  "singleQuote": false,
+  "quoteProps": "consistent",
+  "trailingComma": "all",
+  "bracketSpacing": true,
+  "arrowParens": "always",
+  "proseWrap": "always",
+  "endOfLine": "lf",
+  // An XML formatter reindents logo.svg and inserts whitespace text nodes
+  // between the <tspan>s, which SVG renders as a visible space between the "f"
+  // and "p" glyphs.
+  "ignorePatterns": ["deno.lock", ".github/assets/logo.svg"],
+}

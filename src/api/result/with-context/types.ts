@@ -111,6 +111,4 @@ export type ContextMappingFunction<
  *   error({ code: e });
  * ```
  */
-export type ErrorMappingFunction<E, F> = (
-  e: E,
-) => Error<F> | Promise<Error<F>>;
+export type ErrorMappingFunction<E, F> = (e: E) => Error<F> | Promise<Error<F>>;

@@ -34,6 +34,4 @@ export type ImmutableArray<T> = ReadonlyArray<T>;
  * const counts: ImmutableRecord<string, number> = { posts: 2 };
  * ```
  */
-export type ImmutableRecord<K extends PropertyKey, V> = Readonly<
-  Record<K, V>
->;
+export type ImmutableRecord<K extends PropertyKey, V> = Readonly<Record<K, V>>;

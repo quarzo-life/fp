@@ -38,8 +38,9 @@ describe("classified failures", () => {
   });
 
   test("TransientTechnicalFailure is tagged TRANSIENT_TECHNICAL", () => {
-    expect(new TransientTechnicalFailure("Timeout", "TIMEOUT").failureKind)
-      .toBe("TRANSIENT_TECHNICAL");
+    expect(
+      new TransientTechnicalFailure("Timeout", "TIMEOUT").failureKind,
+    ).toBe("TRANSIENT_TECHNICAL");
   });
 
   test("PermanentTechnicalFailure is tagged PERMANENT_TECHNICAL", () => {

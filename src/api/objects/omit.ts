@@ -15,8 +15,9 @@
  * ```
  */
 export const omit =
-  <K extends string>(key: K): <T extends object>(obj: T) => Omit<T, K> =>
+  <K extends string>(key: K): (<T extends object>(obj: T) => Omit<T, K>) =>
   <T extends object>(obj: T): Omit<T, K> =>
-    Object.fromEntries(
-      Object.entries(obj).filter(([k]) => k !== key),
-    ) as Omit<T, K>;
+    Object.fromEntries(Object.entries(obj).filter(([k]) => k !== key)) as Omit<
+      T,
+      K
+    >;

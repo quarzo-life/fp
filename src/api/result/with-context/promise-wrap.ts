@@ -21,8 +21,9 @@ import type { WithContext } from "./types.ts";
  * getTestResult(result); // { value: 1, context: { step: 2 } }
  * ```
  */
-export const promiseWrap = <Context>(
-  context: Context,
-): <U>(promise: Promise<U>) => Promise<Success<WithContext<U, Context>>> =>
-<U>(promise: Promise<U>): Promise<Success<WithContext<U, Context>>> =>
-  promise.then((value) => success({ value, context }));
+export const promiseWrap =
+  <Context>(
+    context: Context,
+  ): (<U>(promise: Promise<U>) => Promise<Success<WithContext<U, Context>>>) =>
+  <U>(promise: Promise<U>): Promise<Success<WithContext<U, Context>>> =>
+    promise.then((value) => success({ value, context }));

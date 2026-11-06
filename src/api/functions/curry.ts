@@ -14,7 +14,8 @@ import type { AnyFunction } from "./types.ts";
  * // (arg: string) => (arg: string) => string
  * ```
  */
-export type CurryResult<Args extends unknown[], R> = Args extends [] ? () => R
+export type CurryResult<Args extends unknown[], R> = Args extends []
+  ? () => R
   : CurryResultNonEmpty<Args, R>;
 
 /**
@@ -30,10 +31,11 @@ export type CurryResult<Args extends unknown[], R> = Args extends [] ? () => R
  * // (arg: number) => (arg: number) => number
  * ```
  */
-export type CurryResultNonEmpty<Args extends unknown[], R> = Args extends
-  [infer Head, ...infer Rest] ? (
-    arg: Head,
-  ) => Rest extends [] ? R : CurryResultNonEmpty<Rest, R>
+export type CurryResultNonEmpty<Args extends unknown[], R> = Args extends [
+  infer Head,
+  ...infer Rest,
+]
+  ? (arg: Head) => Rest extends [] ? R : CurryResultNonEmpty<Rest, R>
   : R;
 
 /**

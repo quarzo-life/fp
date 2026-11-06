@@ -18,6 +18,5 @@ import type { Option, Some } from "./types.ts";
  * cautiouslyUseIsSome(none()); // false
  * ```
  */
-export const cautiouslyUseIsSome = <U>(
-  option: Option<U>,
-): option is Some<U> => option.type === "SOME";
+export const cautiouslyUseIsSome = <U>(option: Option<U>): option is Some<U> =>
+  option.type === "SOME";

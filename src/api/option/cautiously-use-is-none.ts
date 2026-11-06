@@ -18,6 +18,5 @@ import type { None, Option } from "./types.ts";
  * cautiouslyUseIsNone(some(1)); // false
  * ```
  */
-export const cautiouslyUseIsNone = <U>(
-  option: Option<U>,
-): option is None<U> => option.type === "NONE";
+export const cautiouslyUseIsNone = <U>(option: Option<U>): option is None<U> =>
+  option.type === "NONE";

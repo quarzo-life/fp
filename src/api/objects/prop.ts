@@ -14,8 +14,9 @@
  */
 export type PropValue<T, K extends PropertyKey> = T extends null | undefined
   ? undefined
-  : K extends keyof T ? T[K]
-  : undefined;
+  : K extends keyof T
+    ? T[K]
+    : undefined;
 
 /**
  * Reads a property from an object, data-last and optionally curried.

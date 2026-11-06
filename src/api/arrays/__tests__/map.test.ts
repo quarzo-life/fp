@@ -18,8 +18,7 @@ describe("map", () => {
 
   test("passes the index to the mapper", () => {
     expect(map((_: string, index: number) => index, ["a", "b"])).toEqual([
-      0,
-      1,
+      0, 1,
     ]);
   });
 });

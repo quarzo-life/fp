@@ -24,7 +24,7 @@ import type { AnyAsyncFunction } from "./types.ts";
  */
 export const composeAsync = <T>(
   ...fns: AnyAsyncFunction[]
-): (...args: unknown[]) => Promise<T> => {
+): ((...args: unknown[]) => Promise<T>) => {
   if (fns.length === 0) {
     return (...args: unknown[]) => Promise.resolve(args[0] as T);
   }

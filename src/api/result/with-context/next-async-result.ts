@@ -51,7 +51,5 @@ export function nextAsyncResult<U, E, Context = Record<string, never>>(
   context?: Context,
 ): WithContextAsyncResult<U, E, Context> {
   const initialContext = context ?? ({} as Context);
-  return withContextAsyncResult(
-    promiseResultWrap(initialContext)(promise),
-  );
+  return withContextAsyncResult(promiseResultWrap(initialContext)(promise));
 }
